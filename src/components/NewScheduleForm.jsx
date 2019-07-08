@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { v4 } from 'uuid';
-// import { Redirect } from 'react-router';
-// import { Link } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import { Redirect } from 'react-router';
+import { withRouter } from 'react-router-dom';
+import { push } from 'react-router-redux'
 
-export default function NewScheduleForm(props) {
-  let _day = '';
-  let _location = '';
-  let _hours = '';
-  let _booth = '';
+function NewScheduleForm(props) {
+  let _day;
+  let _location;
+  let _hours;
+  let _booth;
+  const history = createBrowserHistory();
 
   function handleNewScheduleFormSubmission(event) {
     event.preventDefault();
@@ -17,24 +20,20 @@ export default function NewScheduleForm(props) {
     _location.value = '';
     _hours.value = '';
     _booth.value = '';
-    
+    // console.log(history);    
+    // this.props.history.push('/thank-you');
+    // console.log(history);
+    dispatch(push('/home'));
   }
-
-  let button = '';
-  if(_day.value === '' || _location.value === '' || _hours.value === '' || _booth.value === '') {
-    button = <button type="submit" disabled>Submit!</button>;
-  } else {
-    button = <button type="submit">Submit!</button>;
-  }
-
+  
   return (
     <div>
-      <form onSubmit={handleNewScheduleFormSubmission}>
+      <form onSubmit={() => {handleNewScheduleFormSubmission; }}>
         <input type="text" id="day" placeholder="Day" ref={(input) => { _day = input; }} required />
         <input type="text" id="location" placeholder="Location" ref={(input) => { _location = input; }} required />
         <input type="text" id="hour" placeholder="Hours" ref={(input) => { _hours = input; }} required />
         <input type="text" id="booth" placeholder="Booth" ref={(input) => { _booth = input; }} required />
-        {button}
+        <button type="submit">Submit!</button>
       </form>
     </div>
   );
@@ -43,3 +42,5 @@ export default function NewScheduleForm(props) {
 NewScheduleForm.propTypes = {
   onNewScheduleCreation: PropTypes.func
 };
+
+export default withRouter(NewScheduleForm);
