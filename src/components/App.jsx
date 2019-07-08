@@ -3,6 +3,8 @@ import Schedule from './Schedule';
 import Header from './Header';
 import SeasonalProduce from './SeasonalProduce';
 import { Switch, Route } from 'react-router-dom';
+import NewScheduleForm from './NewScheduleForm';
+
 
 
 function App() {
@@ -20,6 +22,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={Schedule} />
         <Route path='/produce' component={SeasonalProduce} />
+        <Route path='/form' component={NewScheduleForm} />
       </Switch>
     </div>
   );
