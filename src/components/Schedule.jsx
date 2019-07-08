@@ -1,58 +1,26 @@
 import React from 'react';
 import Appearance from './Appearance';
+import PropTypes from 'prop-types';
 
-const marketSchedule = [
-  {
-    day: 'Sunday',
-    location: 'Lents International',
-    hours: '9:00am - 2:00pm',
-    booth: '4A'
-  },
-  {
-    day: 'Monday',
-    location: 'Pioneer Courthouse Square',
-    hours: '10:00am - 2:00pm',
-    booth: '7C'
-  },
-  {
-    day: 'Tuesday',
-    location: 'Hillsboro',
-    hours: '5:00pm - 8:30pm',
-    booth: '1F'
-  },
-  {
-    day: 'Wednesday',
-    location: 'Shemanski Park',
-    hours: '10:00am - 2:00pm',
-    booth: '3E'
-  },
-  {
-    day: 'Thursday',
-    location: 'Northwest Portland',
-    hours: '2:00pm - 6:00pm',
-    booth: '6D'
-  },
-  {
-    day: 'Saturday',
-    location: 'Beaverton',
-    hours: '10:00am - 1:30pm',
-    booth: '9G'
-  }
-];
-
-function Schedule() {
+function Schedule(props) {
+  console.log(props.marketSchedule);
+  
   return (
     <div>
       
-      {marketSchedule.map((appearance, index) =>
+      {props.marketSchedule.map((appearance) =>
         <Appearance day={appearance.day}
           location={appearance.location}
           hours={appearance.hours}
           booth={appearance.booth}
-          key={index} />
+          key={appearance.id} />
       )}
     </div>
   );
 }
+
+Schedule.propTypes = {
+  marketSchedule: PropTypes.array
+};
 
 export default Schedule;
