@@ -10,7 +10,7 @@ export default function NewScheduleForm(props) {
 
   function handleNewScheduleFormSubmission(event) {
     event.preventDefault();
-    props.onNewTicketCreation({day: _day.value, location: _location.value, hours: _hours.value, booth: _booth.value, id: v4()});
+    props.onNewScheduleCreation({day: _day.value, location: _location.value, hours: _hours.value, booth: _booth.value, id: v4()});
     _day.value = '';
     _location.value = '';
     _hours.value = '';
@@ -25,11 +25,11 @@ export default function NewScheduleForm(props) {
         <input type="text" id="hour" placeholder="Hours" ref={(input) => {_hours = input;}}/>
         <input type="text" id="booth" placeholder="Booth" ref={(input) => {_booth = input;}}/>
         <button type="submit">Submit!</button>
-      </form>  
+      </form>
     </div>
   );
 }
 
 NewScheduleForm.propTypes = {
-    
-}
+    onNewScheduleCreation: PropTypes.func
+};

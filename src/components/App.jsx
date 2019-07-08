@@ -7,25 +7,43 @@ import NewScheduleForm from './NewScheduleForm';
 
 
 
-function App() {
-  return (
-    <div>
-      <style global jsx>{`
-        h2 {
-          text-align: center;
-        }
-        span {
-          text-align: center;
-        }
-      `}</style>
-      <Header />
-      <Switch>
-        <Route exact path='/' component={Schedule} />
-        <Route path='/produce' component={SeasonalProduce} />
-        <Route path='/form' component={NewScheduleForm} />
-      </Switch>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      masterScheduleList: []
+    };
+    this.handleAddingNewScheduleToList = this.handleAddingNewScheduleToList.bind(this);
+  }
+
+  handleAddingNewScheduleToList(newSchedule) {
+    let newMasterScheduleList = this.state.masterScheduleList.slice();
+    newMasterScheduleList.push(newSchedule);
+    this.setState({masterScheduleList: newMasterScheduleList});
+    
+  }
+
+  render() {
+    return (
+      <div>
+        <style global jsx>{`
+          h2 {
+            text-align: center;
+          }
+          span {
+            text-align: center;
+          }
+        `}</style>
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Schedule} />
+          <Route path='/produce' component={SeasonalProduce} />
+          <Route path='/form' render={() =><NewScheduleForm onNewScheduleCreation={this.handleAddingNewScheduleToList} />} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;
